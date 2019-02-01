@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dockertut</title>
+</head>
+<body>
+    <h1>Hello from front | <span></span></h1>
+</body>
+<script>
+    const h1 = document.querySelector('h1');
+    const span = document.querySelector('span');
+
+    const g = () => { 
+        fetch('http://localhost:8082', { method: 'get' })
+        .then(r => r.json())
+        .then(r => {
+            span.innerText = r.val;
+        });
+    }
+
+    const p = () => { 
+        fetch('http://localhost:8082', { method: 'post'})
+        .then(r => r.json())
+        .then(r => {
+            const m = document.createElement('div');
+            m.innerText = r.text 
+            document.body.append(m)
+            g();
+        });
+    }
+
+    h1.addEventListener('click', p);
+    g();
+</script>
+</html>
